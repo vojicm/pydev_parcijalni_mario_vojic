@@ -1,33 +1,18 @@
-### Parcijalni Ispit - Razvoj Web Aplikacija u Programskom Jeziku Python
+# **Parcijalni Ispit - Razvoj Web Aplikacija u Programskom Jeziku Python**
 
-## Upute za Rješavanje Zadatka
+## **Upute za Rješavanje Zadatka**
 
-### 1. **Priprema okruženja:**
+### 1. **Priprema okruženja**
+- Forkajte repozitorij na GitHubu:
+  - Posjetite [GitHub repozitorij projekta](https://github.com/algebra-pydev/parcijalni-ispit-04-razvoj-web-aplikacija-u-programskom-jeziku-python).
+  - Kliknite na gumb **"Fork"** kako biste stvorili vlastitu kopiju repozitorija.
+- Dodijelite repozitoriju naziv u formatu `pydev_parcijalni_ime_prezime` (npr. `pydev_parcijalni_ana_kovačić`).
+- **VAŽNO:** Nemojte raditi **clone** glavnog repozitorija jer nemate pravo mijenjanja originalnog koda.
 
-- Kreirajte **"fork"** repozitorija  na GitHubu.
-- Dodijelite repozitoriju naziv u formatu `pydev_parcijalni_ime_prezime` (primjer: `pydev_parcijalni_pero_peric`).
-- **VAŽNO:** Nemojte kreirati **"clone"** repozitorija jer nemate pravo mijenjanja.
+---
 
-### 2. **Postavljanje Projekta:**
-
-- Nakon što ste kreirali **fork**, klonirajte repozitorij s vašeg GitHub profila na lokalno računalo koristeći GitHub Desktop ili drugu omiljenu metodu.
-- Uklonite postojeće virtualno okruženje ako je prisutno i kreirajte novo koristeći `venv` (Python virtualno okruženje).
-- Ako je potrebno, instalirajte module iz datoteke `requirements.txt` pomoću `pip install -r requirements.txt`.
-
-### 3. **Implementacija Funkcionalnosti:**
-
-Repozitorij sadrži djelomično implementiranu aplikaciju kojoj nedostaju određene funkcionalnosti. Mjesta gdje treba dodati funkcionalnosti označena su komentarima `#TODO` i ključnom riječi `pass`. Vaš zadatak je dopuniti funkcije, ukloniti `pass`, te ostaviti `#TODO` komentar netaknutim.
-
-### 4. **Zadaci za Implementaciju:**
-
-- **Kreiranje nedostajucih putanja i `urls.py` datoteka u aplikacijama**.
-- **Integrirati Bootstrap u projekt. Download i dodavanje u projekt**.
-
-
-### 5. **Upute za Korištenje Django Usera:**
-Za korisnike ćete koristiti Django-ov integrirani model **User**. Ovo će omogućiti autentifikaciju i pohranu korisničkih podataka.
-
-### 6. **Struktura Projekta:**
+### 2. **Postavljanje projekta**
+#### Struktura projekta:
 ```
 offers_calculator/            # Glavni direktorij Django projekta
 │
@@ -92,218 +77,101 @@ offers_calculator/            # Glavni direktorij Django projekta
     └── images/               # Slike
 ```
 
-### 7. **Detalji Implementacije:**
-
-1. **Učitavanje podataka o korisnicima**:
-   - Ovdje se koristi Django-ov **User model** za upravljanje korisnicima.
-   - Za autentifikaciju korisnika koristit ćemo Django formu za prijavu.
-
-2. **Kreiranje novih ponuda**:
-   - Kreirajte obrazac za unos novih ponuda (kao što je ime kupca, datum, proizvodi).
-   - Osigurajte da ponuda bude pohranjena u **SQLite**.
-
-3. **Upravljanje proizvodima**:
-   - Omogućite dodavanje i izmjenu proizvoda.
-   - Proizvodi bi trebali biti povezani s ponudama.
-
-4. **Pohrana novih ponuda**:
-   - Osigurajte da se ponude pohranjuju u **SQLite**.
-
-5. **Ispis ponuda**:
-   - Omogućite ispis svih ponuda ili filtriranje ponuda prema mjesecu.
-
-### 8. **Kreiranje Django Modela:**
-Zadatak uključuje korištenje Django-ovih modela za rad s korisnicima, proizvodima i ponudama. Svaki model treba biti u odgovarajućem direktoriju (`users`, `products`, `offers`) i biti povezan s bazom podataka (`db.sqlite3`).
-
-#### Model korisnika (`users/models.py`):
-```python
-from django.contrib.auth.models import User
-
-class CustomUser(User):
-    # Ovdje možete dodati dodatna polja za korisnika ako je potrebno.
-    pass
-```
-
-#### Model proizvoda (`products/models.py`):
-```python
-from django.db import models
-
-class Product(models.Model):
-    name = models.CharField(max_length=100)
-    description = models.TextField()
-    price = models.DecimalField(max_digits=10, decimal_places=2)
-
-    def __str__(self):
-        return self.name
-```
-
-#### Model ponude (`offers/models.py`):
-```python
-from django.db import models
-from products.models import Product
-from users.models import CustomUser
-
-class Offer(models.Model):
-    customer = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
-    date = models.DateField()
-    products = models.ManyToManyField(Product)
-    sub_total = models.DecimalField(max_digits=10, decimal_places=2)
-    tax = models.DecimalField(max_digits=10, decimal_places=2)
-    total = models.DecimalField(max_digits=10, decimal_places=2)
-
-    def __str__(self):
-        return f"Offer #{self.id} for {self.customer.username}"
-```
-
-### 9. **Dodatni Zadaci:**
-- Implementirati REST API za dohvaćanje korisničkih podataka putem **Django REST Framework** (ako se zahtijeva).
-- Kreirati obrasce i prikaze za unos novih ponuda i proizvoda.
-
-### 10. **Upute za Uporabu:**
-- **Pokretanje aplikacije**: Koristite **Django** komandu za migraciju i pokretanje aplikacije:
-  ```bash
-  python manage.py migrate
-  python manage.py runserver
-  ```
-
-- **Dodavanje korisnika**:
-  U Django administraciji možete dodavati korisnike ili koristiti Django-ovu formu za prijavu.
-
-- **Testiranje funkcionalnosti**:
-  Provjerite sve funkcionalnosti aplikacije putem sučelja i konzole.
-
-### 11. **Dodatne Upute:**
-
-- Nemojte mijenjati druge dijelove aplikacije. Ako Vaša implementacija ne radi, prilagodite svoje rješenje aplikaciji, a ne obrnuto.
-- Koristite **TypeHints** za sve metode kako biste osigurali konzistentnost tipova podataka.
-- Pripazite na Django konfiguraciju i postavke vezane uz bazu podataka i autentifikaciju korisnika.
-
-### 12. **Podnošenje Rješenja:**
-
-Nakon što završite implementaciju:
-
-1. Napravite **commit** za sve promjene koje ste unijeli koristeći **git commit**.
-2. **Pushajte** promjene na vaš GitHub repozitorij pomoću **git push**.
-
-### 13. **Podjela Repozitorija s Predavačem:**
-
-1. Otvorite vaš repozitorij na GitHubu.
-2. Kliknite na karticu **Settings** u repozitoriju.
-3. Pronađite opciju **Collaborators** i dodajte predavača kao **Contributor**.
-4. Provjerite da su sve promjene commitane i pushane prije dodavanja predavača.
-
-### **Sretno!**
-
-
-admin
-admin@offers-calculator.hr
-!Pa$$w0rd!
-
-Dodati CUSTOMERS u aplikaciju
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-## **Step-by-Step Instructions for End User**
-
-### 1. **Fork the Project Repository**
-- Visit the project's GitHub repository.
-- Click the "Fork" button to fork the repository to your own GitHub account.
-- Clone the repository to your local machine:
+#### Koraci:
+1. Klonirajte repozitorij:
+   ```bash
+   git clone https://github.com/vaše-korisničko-ime/parcijalni-ispit.git
+   cd parcijalni-ispit
+   ```
+
+2. Kreirajte virtualno okruženje:
+   ```bash
+   python -m venv venv
+   ```
+
+3. Aktivirajte virtualno okruženje:
+   - **Windows**:
      ```bash
-     git clone https://github.com/your-username/your-repo.git
-     cd your-repo
+     .\venv\Scripts\activate
+     ```
+   - **macOS/Linux**:
+     ```bash
+     source venv/bin/activate
      ```
 
-### 2. **Create and Activate a Virtual Environment**
-- Create a virtual environment for the project:
-     ```bash
-     python -m venv venv
-     ```
-- Activate the virtual environment:
-     - On Windows:
-       ```bash
-       .\venv\Scripts\activate
-       ```
-     - On macOS/Linux:
-       ```bash
-       source venv/bin/activate
-       ```
+4. Instalirajte potrebne module:
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-### 3. **Install Dependencies**
-   - Install the required dependencies listed in `requirements.txt`:
-     ```bash
-     pip install -r requirements.txt
-     ```
+5. Pokrenite migracije:
+   ```bash
+   python manage.py migrate
+   ```
 
-### 4. **Apply Database Migrations**
-   - Run the migrations to set up the database schema:
-     ```bash
-     python manage.py migrate
-     ```
+6. Kreirajte administratorski račun:
+   ```bash
+   python manage.py createsuperuser
+   ```
 
-### 5. **Create a Superuser Account**
-   - Create a superuser account to access the Django admin interface:
-     ```bash
-     python manage.py createsuperuser
-     ```
-   - Follow the prompts to create a username, email, and password.
+7. Popunite bazu podataka:
+   ```bash
+   python manage.py runscript seed_database
+   ```
 
-### 6. **Run the Database Seed Script**
-   - Execute the seed script to populate the database with 50 products and 15 offers:
-     ```bash
-     python manage.py runscript seed_database
-     ```
+8. Pokrenite razvojni server:
+   ```bash
+   python manage.py runserver
+   ```
+   - Aplikaciju otvorite u pregledniku na adresi: `http://127.0.0.1:8000`.
 
-### 7. **Run the Development Server**
-   - Start the Django development server:
-     ```bash
-     python manage.py runserver
-     ```
-   - Visit the app in your browser at: `http://127.0.0.1:8000`
+---
 
-### 8. **Test the Application**
-   - Log in to the admin interface at: `http://127.0.0.1:8000/admin`
-   - Verify that the products and offers are correctly displayed in the app.
+### 3. **Zadaci za implementaciju**
+Dodajte novu Django aplikaciju **customers** za rad s podacima o tvrtkama (kupcima). 
+- **Model Customer**:
+  - `name` (ime tvrtke)
+  - `vat_id` (OIB tvrtke)
+  - `street` (ulica)
+  - `city` (grad)
+  - `country` (država)
+  
+Ažurirajte postojeće modele i funkcionalnosti:
+- **Offer**:
+  - Korisnik (`User`) sada predstavlja osobu koja je kreirala ponudu.
+  - Kupac (`Customer`) je tvrtka za koju je ponuda napravljena.
+- Implementirajte:
+  - Kreiranje novih kupaca.
+  - Ažuriranje postojećih kupaca.
+  - Prikaz svih kupaca u tablici.
+  - Omogućite odabir kupca prilikom kreiranja ponude.
+
+---
+
+### **Dodatne Upute**
+- Nemojte mijenjati ostale dijelove aplikacije. Prilagodite svoje rješenje aplikaciji, a ne obrnuto.
+- Koristite `TypeHints` prema uputama u komentarima kako biste osigurali konzistentnost tipova podataka.
+
+---
+
+## **Podnošenje Rješenja**
+
+1. Napravite **commit** za sve promjene koristeći opciju:
+   ```bash
+   git commit -am "Implementacija zadatka"
+   ```
+
+2. Pushajte promjene na GitHub:
+   ```bash
+   git push
+   ```
+
+3. Podijelite repozitorij s predavačem:
+   - Otvorite vaš repozitorij na GitHubu.
+   - Kliknite na **Settings**.
+   - Pronađite opciju **Collaborators** i dodajte predavača kao **Contributor**.
+   - Unesite korisničko ime predavača i pošaljite pozivnicu.
+
+**VAŽNO:** Provjerite da su sve promjene commitane i pushane prije dodavanja predavača.
+
+**Sretno!**
