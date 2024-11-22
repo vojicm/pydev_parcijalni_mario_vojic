@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import JsonResponse
 from .models import Offer, OfferItem
@@ -7,6 +8,7 @@ from django.views.decorators.http import require_http_methods
 from decimal import Decimal
 
 
+@login_required
 @require_http_methods(["GET"])
 def offer_list(request):
     """
@@ -36,6 +38,7 @@ def offer_list(request):
                   {'offers': offers})
 
 
+@login_required
 @require_http_methods(["GET"])
 def offer_detail(request, pk):
     """
@@ -69,6 +72,7 @@ def offer_detail(request, pk):
     return render(request, 'offers/offer_detail.html', {'offer': offer, 'items': items})
 
 
+@login_required
 @require_http_methods(["GET", "POST"])
 def offer_create(request):
     """
@@ -102,6 +106,7 @@ def offer_create(request):
                    'products': products})
 
 
+@login_required
 @require_http_methods(["GET", "POST"])
 def offer_edit(request, pk):
     """

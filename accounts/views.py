@@ -1,4 +1,5 @@
 from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
@@ -9,7 +10,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 
 
 @method_decorator(csrf_exempt, name='dispatch')
-class UserListView(View):
+class UserListView(LoginRequiredMixin, View):
     """
     View to list all users in the system.
     Supports API and HTML rendering.

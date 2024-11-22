@@ -31,6 +31,8 @@ Za korisnike ćete koristiti Django-ov integrirani model **User**. Ovo će omogu
 ```
 offers_calculator/            # Glavni direktorij Django projekta
 │
+├── db.sqlite3                # SQLite baza podataka
+│
 ├── offers_calculator/        # Direktorij glavnih postavki projekta
 │   ├── __init__.py           # Oznaka za Python paket
 │   ├── asgi.py               # Konfiguracija za ASGI server
@@ -38,8 +40,6 @@ offers_calculator/            # Glavni direktorij Django projekta
 │   ├── urls.py               # Globalne rute aplikacije
 │   ├── wsgi.py               # Konfiguracija za WSGI server
 │   └── manage.py             # Glavna skripta za upravljanje projektom
-│
-├── db.sqlite3                # SQLite baza podataka
 │
 ├── accounts/                 # Aplikacija za upravljanje korisnicima (Django User model)
 │   ├── __init__.py
@@ -73,6 +73,9 @@ offers_calculator/            # Glavni direktorij Django projekta
 │   ├── views.py              # Pogledi za ponude
 │   └── migrations/
 │       └── __init__.py
+│
+├── scripts/                  # Direktorij za Python skripte koje pomažu u administraciji i inicijalizaciji projekta
+│   └── seed_database.py      # Skripta za inicijalno popunjavanje baze podataka s testnim podacima (seed)
 │
 ├── templates/                # Globalni direktorij za HTML predloške
 │   ├── base.html             # Osnovni HTML predložak za aplikaciju
@@ -197,3 +200,110 @@ admin@offers-calculator.hr
 !Pa$$w0rd!
 
 Dodati CUSTOMERS u aplikaciju
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## **Step-by-Step Instructions for End User**
+
+### 1. **Fork the Project Repository**
+- Visit the project's GitHub repository.
+- Click the "Fork" button to fork the repository to your own GitHub account.
+- Clone the repository to your local machine:
+     ```bash
+     git clone https://github.com/your-username/your-repo.git
+     cd your-repo
+     ```
+
+### 2. **Create and Activate a Virtual Environment**
+- Create a virtual environment for the project:
+     ```bash
+     python -m venv venv
+     ```
+- Activate the virtual environment:
+     - On Windows:
+       ```bash
+       .\venv\Scripts\activate
+       ```
+     - On macOS/Linux:
+       ```bash
+       source venv/bin/activate
+       ```
+
+### 3. **Install Dependencies**
+   - Install the required dependencies listed in `requirements.txt`:
+     ```bash
+     pip install -r requirements.txt
+     ```
+
+### 4. **Apply Database Migrations**
+   - Run the migrations to set up the database schema:
+     ```bash
+     python manage.py migrate
+     ```
+
+### 5. **Create a Superuser Account**
+   - Create a superuser account to access the Django admin interface:
+     ```bash
+     python manage.py createsuperuser
+     ```
+   - Follow the prompts to create a username, email, and password.
+
+### 6. **Run the Database Seed Script**
+   - Execute the seed script to populate the database with 50 products and 15 offers:
+     ```bash
+     python manage.py runscript seed_database
+     ```
+
+### 7. **Run the Development Server**
+   - Start the Django development server:
+     ```bash
+     python manage.py runserver
+     ```
+   - Visit the app in your browser at: `http://127.0.0.1:8000`
+
+### 8. **Test the Application**
+   - Log in to the admin interface at: `http://127.0.0.1:8000/admin`
+   - Verify that the products and offers are correctly displayed in the app.

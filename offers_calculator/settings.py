@@ -38,10 +38,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'django_extensions',
+
     'accounts',  # Custom app for users
     'products',  # Custom app for products
     'offers',  # Custom app for offers
 ]
+INSTALLED_APPS += ['scripts']
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -52,6 +55,10 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+LOGIN_URL = '/accounts/login/'  # Redirect URL for login
+LOGIN_REDIRECT_URL = '/'       # Redirect after login
+LOGOUT_REDIRECT_URL = '/accounts/login/'  # Redirect after logout
 
 ROOT_URLCONF = 'offers_calculator.urls'
 

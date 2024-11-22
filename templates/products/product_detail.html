@@ -10,7 +10,7 @@
             <h2 class="mb-0">{{ product.name }}</h2>
         </div>
         <div class="col-md-6 text-end">
-            <a href="{{ product.id }}/update/" class="btn btn-primary">Edit</a>
+            <a href="{% url 'product_update' product.id %}" class="btn btn-primary">Edit</a>
             <a href="{% url 'product_list' %}" class="btn btn-secondary">Back to Products</a>
         </div>
     </div>

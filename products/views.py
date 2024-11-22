@@ -1,8 +1,10 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import JsonResponse
 from .models import Product
 
 
+@login_required
 def product_list(request):
     """
     View to display a list of all products.
@@ -24,6 +26,7 @@ def product_list(request):
                   {'products': products})
 
 
+@login_required
 def product_detail(request, pk):
     """
     View to display details of a single product.
@@ -41,6 +44,7 @@ def product_detail(request, pk):
     return render(request, 'products/product_detail.html', {'product': product})
 
 
+@login_required
 def product_create(request):
     """
     View to create a new product.
@@ -58,6 +62,7 @@ def product_create(request):
     return render(request, 'products/product_create_form.html')
 
 
+@login_required
 def product_update(request, pk):
     """
     View to update an existing product.
